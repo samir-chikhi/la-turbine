@@ -1,0 +1,195 @@
+/* turbine.css — mini-site « La Turbine », autoportant (n'utilise ni v2.css ni v2-chrome.css).
+   Palette tirée des affiches publiées : crème, corail, moutarde, ciel, encre.
+   Signature : traits d'encre épais, ombres franches décalées, bulles de BD. */
+@font-face { font-family: "Bricolage Grotesque"; font-style: normal; font-weight: 600 800; font-display: swap; src: url("assets/fonts/bricolage-grotesque-latin-variable.woff2") format("woff2"); }
+@font-face { font-family: "DM Sans"; font-style: normal; font-weight: 300 700; font-display: swap; src: url("assets/fonts/dm-sans-latin-variable.woff2") format("woff2"); }
+
+:root {
+  --creme: #FBF6E9;
+  --creme-2: #F3EAD2;
+  --corail: #DE5B3D;
+  --corail-d: #B8431F;   /* corail foncé : texte et liens sur crème (contraste AA) */
+  --rouge: #E5392B;      /* le rouge du sous-titre du logo */
+  --moutarde: #E8A94A;
+  --ciel: #DCEAF4;
+  --rose: #F9DDD5;
+  --encre: #211D18;
+  --gris: #5B554C;
+  --trait: 2.5px solid var(--encre);
+  --ombre: 5px 5px 0 var(--encre);
+  --display: "Bricolage Grotesque", "DM Sans", system-ui, sans-serif;
+  --texte: "DM Sans", system-ui, -apple-system, sans-serif;
+  --wrap: 1120px;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body { margin: 0; font: 400 1.0625rem/1.65 var(--texte); color: var(--encre); background: var(--creme); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+img { max-width: 100%; height: auto; display: block; }
+a { color: var(--corail-d); text-underline-offset: 3px; }
+a:hover { color: var(--encre); }
+h1, h2, h3 { font-family: var(--display); font-weight: 800; letter-spacing: -.02em; line-height: 1.08; margin: 0 0 .5em; text-wrap: balance; }
+h1 { font-size: clamp(2.2rem, 5.6vw, 4rem); }
+h2 { font-size: clamp(1.7rem, 3.6vw, 2.5rem); }
+h3 { font-size: 1.25rem; line-height: 1.2; }
+p { margin: 0 0 1em; }
+ul { padding-left: 1.2em; }
+.wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 20px; }
+@media (min-width: 760px) { .wrap { padding: 0 40px; } }
+:focus-visible { outline: 3px solid var(--corail); outline-offset: 3px; }
+.skip { position: absolute; left: -999px; top: 8px; background: var(--moutarde); color: var(--encre); padding: 8px 14px; border: var(--trait); border-radius: 8px; z-index: 100; }
+.skip:focus { left: 8px; }
+.ico { width: 1.25em; height: 1.25em; flex: none; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; vertical-align: -.22em; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* ── Bandeau « accueillie au Génie » ── */
+.bandeau { background: var(--encre); color: var(--creme); font-size: .85rem; }
+.bandeau .wrap { display: flex; justify-content: space-between; gap: 12px; align-items: center; min-height: 38px; flex-wrap: wrap; padding-block: 6px; }
+.bandeau a { color: var(--moutarde); font-weight: 600; text-decoration: none; }
+.bandeau a:hover { color: #fff; text-decoration: underline; }
+
+/* ── En-tête ── */
+.t-head { position: sticky; top: 0; z-index: 50; background: rgba(251,246,233,.97); backdrop-filter: blur(8px); border-bottom: var(--trait); }
+.t-head .wrap { display: flex; align-items: center; gap: 14px; min-height: 68px; }
+.t-logo { display: block; flex: none; }
+.t-logo img { height: 46px; width: auto; }
+.t-nav { margin-left: auto; display: flex; align-items: center; gap: 2px; }
+.t-nav a { text-decoration: none; color: var(--encre); font-weight: 600; font-size: .98rem; padding: 8px 12px; border-radius: 10px; }
+.t-nav a:hover { background: var(--creme-2); color: var(--encre); }
+.t-nav a[aria-current="page"] { box-shadow: inset 0 -3px 0 var(--corail); }
+.t-nav .t-cta { background: var(--corail); border: var(--trait); box-shadow: 3px 3px 0 var(--encre); margin-left: 8px; padding: 7px 14px; }
+.t-nav .t-cta:hover { background: var(--moutarde); }
+.t-nav .t-cta[aria-current="page"] { box-shadow: 3px 3px 0 var(--encre); }
+.t-soc { display: flex; gap: 6px; margin-left: 6px; }
+.t-soc a { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 50%; border: var(--trait); color: var(--encre); background: #fff; padding: 0; }
+.t-soc a:hover { background: var(--moutarde); }
+.t-burger { display: none; margin-left: auto; width: 46px; height: 46px; border: var(--trait); border-radius: 12px; background: #fff; cursor: pointer; padding: 0; }
+.t-burger span { display: block; width: 22px; height: 2.5px; background: var(--encre); margin: 5px auto; border-radius: 2px; }
+@media (max-width: 940px) {
+  .t-burger { display: block; }
+  .t-nav { display: none; position: absolute; left: 0; right: 0; top: 100%; background: var(--creme); border-bottom: var(--trait); flex-direction: column; align-items: stretch; padding: 12px 20px 20px; margin: 0; gap: 4px; }
+  .t-nav.is-open { display: flex; }
+  .t-nav a { padding: 13px 12px; font-size: 1.05rem; }
+  .t-nav .t-cta { margin: 8px 0 0; text-align: center; }
+  .t-soc { margin: 8px 0 0; }
+}
+
+/* ── Boutons, étiquettes ── */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 50px; padding: 11px 22px; border: var(--trait); border-radius: 14px; font: 700 1rem var(--texte); text-decoration: none; color: var(--encre); background: var(--corail); box-shadow: 4px 4px 0 var(--encre); transition: transform .12s, box-shadow .12s, background .12s; cursor: pointer; }
+.btn:hover { background: var(--moutarde); color: var(--encre); transform: translate(-1px,-1px); box-shadow: 6px 6px 0 var(--encre); }
+.btn:active { transform: translate(3px,3px); box-shadow: 1px 1px 0 var(--encre); }
+.btn-clair { background: #fff; }
+.btn-clair:hover { background: var(--ciel); }
+.btn-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 22px; }
+@media (max-width: 520px) { .btn-row .btn { flex: 1 1 100%; } }
+.etiquette { display: inline-block; font: 700 .8rem/1 var(--texte); letter-spacing: .1em; text-transform: uppercase; background: var(--rouge); color: #fff; padding: 8px 12px; border-radius: 6px; transform: rotate(-1.5deg); margin-bottom: 14px; }
+.etiquette.moutarde { background: var(--moutarde); color: var(--encre); }
+.etiquette.ciel { background: var(--ciel); color: var(--encre); }
+.lien-fl { font-weight: 700; text-decoration: none; display: inline-flex; gap: 6px; align-items: center; }
+.lien-fl:hover { text-decoration: underline; }
+
+/* ── Sections ── */
+.sec { padding: 72px 0; }
+@media (max-width: 760px) { .sec { padding: 52px 0; } }
+.sec-ciel { background: var(--ciel); border-block: var(--trait); }
+.sec-moutarde { background: var(--moutarde); border-block: var(--trait); }
+.sec-encre { background: var(--encre); color: var(--creme); }
+.sec-encre a { color: var(--moutarde); }
+.sec-tete { max-width: 700px; margin-bottom: 38px; }
+.lede { font-size: 1.2rem; line-height: 1.55; max-width: 60ch; }
+
+/* ── Héros ── */
+.hero { padding: 54px 0 70px; }
+.hero-grille { display: grid; gap: 40px; align-items: center; }
+@media (min-width: 900px) { .hero-grille { grid-template-columns: 1.05fr .95fr; gap: 56px; } }
+.hero-logo { width: min(100%, 560px); margin-bottom: 18px; }
+.hero h1 { font-size: clamp(1.9rem, 4.4vw, 3rem); margin-bottom: .4em; }
+.hero h1 em { font-style: normal; color: var(--rouge); }
+.hero-aff { position: relative; transform: rotate(1.6deg); }
+.hero-aff img { border: var(--trait); border-radius: 16px; box-shadow: 9px 9px 0 var(--encre); background: #fff; }
+.hero-aff .pastille { position: absolute; left: -14px; bottom: 22px; transform: rotate(-6deg); }
+@media (max-width: 520px) { .hero-aff .pastille { left: -6px; } }
+.pastille { background: var(--moutarde); border: var(--trait); border-radius: 14px; padding: 8px 14px; font: 800 1rem/1.1 var(--display); box-shadow: 3px 3px 0 var(--encre); }
+
+/* ── Carte « prochain rendez-vous » ── */
+.rdv { background: #fff; border: var(--trait); border-radius: 22px 22px 22px 6px; box-shadow: var(--ombre); padding: 28px 28px 30px; }
+.rdv-grille { display: grid; gap: 28px; }
+@media (min-width: 860px) { .rdv-grille { grid-template-columns: 1fr 1fr; align-items: center; } }
+.rdv h2, .rdv h3 { font-size: clamp(1.6rem, 3.4vw, 2.3rem); }
+.rdv-q { font: 800 clamp(1.5rem, 3.2vw, 2.1rem)/1.1 var(--display); margin: 0 0 14px; }
+.infos { list-style: none; padding: 0; margin: 18px 0 0; display: grid; gap: 10px; }
+.infos li { display: flex; gap: 12px; align-items: flex-start; }
+.infos .ico { width: 1.5em; height: 1.5em; color: var(--corail-d); margin-top: 2px; }
+.infos small { display: block; color: var(--gris); }
+.rdv img { border: var(--trait); border-radius: 12px; }
+.bulle { position: relative; background: var(--rose); border: var(--trait); border-radius: 20px; padding: 14px 18px; font-weight: 500; }
+.bulle::after { content: ""; position: absolute; left: 26px; bottom: -12px; width: 20px; height: 20px; background: var(--rose); border-right: var(--trait); border-bottom: var(--trait); transform: rotate(45deg); }
+.bulle p:last-child { margin: 0; }
+
+/* ── Grilles de cartes ── */
+.trois { display: grid; gap: 22px; }
+@media (min-width: 820px) { .trois { grid-template-columns: repeat(3, 1fr); } }
+.carte { background: #fff; border: var(--trait); border-radius: 18px; padding: 26px; box-shadow: 4px 4px 0 var(--encre); }
+.carte .num { font: 800 2.6rem/1 var(--display); color: var(--corail); display: block; margin-bottom: 8px; }
+.carte p:last-child { margin-bottom: 0; }
+.cartes-img { display: grid; gap: 18px; grid-template-columns: repeat(2, 1fr); }
+@media (min-width: 820px) { .cartes-img { grid-template-columns: repeat(4, 1fr); } }
+.cartes-img img { border: var(--trait); border-radius: 12px; box-shadow: 4px 4px 0 var(--encre); background: #fff; width: 100%; }
+.cartes-img figure { margin: 0; }
+.cartes-img figure:nth-child(odd) { transform: rotate(-1deg); }
+.cartes-img figure:nth-child(even) { transform: rotate(1deg); }
+
+/* ── Deux colonnes ── */
+.deux { display: grid; gap: 40px; align-items: center; }
+@media (min-width: 860px) { .deux { grid-template-columns: 1fr 1fr; gap: 64px; } .deux.inverse > :first-child { order: 2; } }
+.deux img { border: var(--trait); border-radius: 16px; box-shadow: var(--ombre); background: #fff; }
+
+/* ── Charte : engagements ── */
+.engagements { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; counter-reset: eng; }
+.engagements li { counter-increment: eng; display: flex; gap: 16px; align-items: flex-start; background: #fff; border: var(--trait); border-radius: 16px; padding: 16px 20px; box-shadow: 3px 3px 0 var(--encre); }
+.engagements li::before { content: counter(eng); flex: none; display: grid; place-items: center; width: 38px; height: 38px; border-radius: 50%; background: var(--moutarde); border: var(--trait); font: 800 1.1rem var(--display); }
+@media (min-width: 860px) { .engagements { grid-template-columns: 1fr 1fr; } }
+
+/* ── Déroulé ── */
+.deroule { list-style: none; padding: 0; margin: 0; border-left: 3px dashed var(--encre); margin-left: 12px; }
+.deroule li { position: relative; padding: 0 0 22px 28px; }
+.deroule li::before { content: ""; position: absolute; left: -12px; top: 5px; width: 21px; height: 21px; border-radius: 50%; background: var(--corail); border: var(--trait); }
+.deroule strong { display: block; font-family: var(--display); font-size: 1.1rem; }
+
+/* ── Liste des rendez-vous ── */
+.rdv-liste { display: grid; gap: 22px; }
+.rdv-ligne { display: grid; gap: 20px; background: #fff; border: var(--trait); border-radius: 18px; padding: 22px; box-shadow: 4px 4px 0 var(--encre); }
+@media (min-width: 760px) { .rdv-ligne { grid-template-columns: 190px 1fr; } }
+.rdv-ligne img { border: var(--trait); border-radius: 10px; }
+.rdv-ligne.passe { background: var(--creme-2); box-shadow: none; }
+.rdv-date { font: 700 .85rem/1.3 var(--texte); letter-spacing: .08em; text-transform: uppercase; color: var(--corail-d); margin-bottom: 4px; }
+.idees { display: flex; flex-wrap: wrap; gap: 10px; list-style: none; padding: 0; margin: 0; }
+.idees li { background: #fff; border: var(--trait); border-radius: 999px; padding: 8px 16px; font-weight: 600; }
+
+/* ── Tableaux d'infos / FAQ ── */
+details { background: #fff; border: var(--trait); border-radius: 14px; padding: 4px 20px; margin-bottom: 12px; }
+summary { cursor: pointer; font: 700 1.05rem var(--display); padding: 14px 0; list-style: none; display: flex; justify-content: space-between; gap: 16px; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "+"; font-size: 1.5rem; line-height: 1; color: var(--corail-d); }
+details[open] summary::after { content: "–"; }
+details p { color: var(--encre); }
+
+/* ── Pied de page ── */
+.t-foot { background: var(--encre); color: var(--creme); padding: 56px 0 30px; margin-top: 0; }
+.t-foot a { color: var(--creme); }
+.t-foot a:hover { color: var(--moutarde); }
+.t-foot-grille { display: grid; gap: 34px; }
+@media (min-width: 820px) { .t-foot-grille { grid-template-columns: 1.4fr 1fr 1fr 1fr; } }
+.t-foot h2 { font: 700 .85rem/1.2 var(--texte); letter-spacing: .14em; text-transform: uppercase; color: var(--moutarde); margin-bottom: 14px; }
+.t-foot ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+.t-foot .logo-pied { background: var(--creme); border-radius: 14px; padding: 10px 14px; display: inline-block; margin-bottom: 14px; }
+.t-foot .logo-pied img { height: 44px; width: auto; }
+.t-foot .soc { display: flex; gap: 10px; margin-top: 10px; }
+.t-foot .soc a { display: grid; place-items: center; width: 42px; height: 42px; border: 2px solid var(--creme); border-radius: 50%; }
+.t-foot .soc a:hover { background: var(--moutarde); color: var(--encre); border-color: var(--moutarde); }
+.t-foot-bas { border-top: 1px solid rgba(251,246,233,.25); margin-top: 38px; padding-top: 20px; font-size: .88rem; color: rgba(251,246,233,.8); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } .hero-aff, .cartes-img figure, .etiquette { transform: none !important; } }
+
+/* Les enfants de grille peuvent rétrécir (évite le débordement horizontal sur mobile) */
+.deux > *, .hero-grille > *, .rdv-grille > *, .trois > *, .rdv-ligne > * { min-width: 0; }
+.hero { overflow-x: clip; }
