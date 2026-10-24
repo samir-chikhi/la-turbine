@@ -12,6 +12,7 @@ Tout changement poussé sur la branche `main` est publié automatiquement par Gi
 |---|---|
 | `index.html` | Accueil (le prochain café y est présenté) |
 | `rendez-vous.html` | Prochain café, FAQ, cafés passés, pistes de thèmes |
+| `memoire.html` | La mémoire de La Turbine : un bloc par café passé, avec compte rendu (à ajouter à chaque café) |
 | `le-principe.html` | Déroulé d'une soirée, charte du débat, rôle de l'animation |
 | `association.html` | Objet, indépendance, fonctionnement, équipe |
 | `rejoindre.html` | Adhésion (1 €), bénévolat, partenariat, contact |
@@ -30,7 +31,7 @@ Tout se fait depuis le navigateur, sur github.com :
 2. **Modifier le texte** : ouvrir le fichier, cliquer sur le crayon ✏️ (*Edit this file*), changer le texte, puis *Commit changes*.
 3. Les endroits à changer pour passer au café suivant :
    - `index.html` et `rendez-vous.html` : bloc « Deuxième rendez-vous » (titre, date, heure, texte de la bulle, affiche) et la fiche `"@type":"Event"` en bas de l'en-tête (dates `startDate` / `endDate`) ;
-   - `rendez-vous.html` : déplacer l'ancien café dans la section « Les cafés passés » ;
+   - `memoire.html` : ajouter le café qui vient d'avoir lieu en haut de la liste (copier le bloc `<article class="rdv-ligne">` du café précédent) avec son compte rendu ;
    - `presse.html` : la date et le titre dans « Informations pratiques ».
 4. Chercher « 19 novembre » dans chaque fichier (touche `t` sur GitHub, ou la loupe) pour ne rien oublier.
 
