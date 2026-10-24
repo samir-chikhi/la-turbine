@@ -1,0 +1,151 @@
+# Configuration de l'interface d'administration (Pages CMS — https://app.pagescms.org)
+# Tout ce qui est modifiable par les bénévoles autorisé·es est déclaré ici.
+media:
+  - name: images
+    label: Images (affiches, visuels)
+    input: img
+    output: /img
+    extensions: [webp, png, jpg, jpeg]
+    rename: safe
+  - name: documents
+    label: Documents (PDF)
+    input: documents
+    output: /documents
+    extensions: [pdf]
+    rename: safe
+
+content:
+  - name: prochain
+    label: Prochain café
+    type: file
+    path: content/prochain.json
+    format: json
+    fields:
+      - { name: actif, label: "Afficher un prochain café sur le site", type: boolean }
+      - { name: etiquette, label: "Étiquette (ex. Troisième rendez-vous)", type: string }
+      - { name: titre, label: "Question de la soirée", type: string }
+      - { name: bulle, label: "Texte de la bulle (quelques questions pour donner envie)", type: text }
+      - { name: date, label: "Date", type: date }
+      - { name: heure_debut, label: "Heure de début (ex. 19:00)", type: string }
+      - { name: heure_fin, label: "Heure de fin (ex. 21:30)", type: string }
+      - { name: invite, label: "Invité·e (laisser vide s'il n'y en a pas)", type: string }
+      - { name: entree, label: "Entrée (ex. Entrée libre)", type: string }
+      - { name: entree_detail, label: "Précision sur l'entrée", type: string }
+      - name: affiche
+        label: Affiche
+        type: image
+        options: { media: images }
+      - { name: affiche_alt, label: "Description de l'affiche (pour les personnes qui ne la voient pas)", type: text }
+
+  - name: cafes
+    label: La mémoire (cafés passés)
+    type: collection
+    path: content/cafes
+    format: yaml-frontmatter
+    filename: "{year}-{month}-{day}-{primary}.md"
+    view: { primary: "titre", sort: "date", order: "desc" }
+    fields:
+      - { name: numero, label: "Numéro du café", type: number }
+      - { name: titre, label: "Question de la soirée", type: string }
+      - { name: date, label: "Date", type: date }
+      - { name: heure_debut, label: "Heure de début (ex. 19:00)", type: string }
+      - { name: heure_fin, label: "Heure de fin (ex. 21:30)", type: string }
+      - { name: invite, label: "Invité·e (laisser vide s'il n'y en a pas)", type: string }
+      - name: affiche
+        label: Affiche
+        type: image
+        options: { media: images }
+      - { name: affiche_alt, label: "Description de l'affiche", type: text }
+      - name: visuels
+        label: "Liens vers des visuels (affiche, remerciements…)"
+        type: object
+        list: true
+        fields:
+          - { name: label, label: "Texte du bouton", type: string }
+          - name: image
+            label: Image
+            type: image
+            options: { media: images }
+      - { name: body, label: "Compte rendu", type: rich-text }
+
+  - name: faq
+    label: Questions fréquentes (page Rendez-vous)
+    type: file
+    path: content/faq.json
+    format: json
+    fields:
+      - name: questions
+        label: Questions
+        type: object
+        list: true
+        fields:
+          - { name: question, label: Question, type: string }
+          - { name: reponse, label: "Réponse (les liens s'écrivent [texte](adresse))", type: text }
+
+  - name: themes
+    label: Pistes de thèmes
+    type: file
+    path: content/themes.json
+    format: json
+    fields:
+      - { name: themes, label: "Thèmes évoqués pour la suite", type: string, list: true }
+
+  - name: documents
+    label: Documents à télécharger
+    type: file
+    path: content/documents.json
+    format: json
+    fields:
+      - name: documents
+        label: Documents
+        type: object
+        list: true
+        fields:
+          - { name: titre, label: Titre, type: string }
+          - { name: description, label: "Description courte", type: string }
+          - name: categorie
+            label: Catégorie
+            type: select
+            options:
+              values: [Association, Charte du débat, Presse, Autre]
+          - name: fichier
+            label: "Fichier (PDF)"
+            type: file
+            options: { media: documents }
+          - name: emplacement
+            label: "Utilisé aussi ailleurs sur le site ?"
+            type: select
+            options:
+              values:
+                - { value: "", label: "Non" }
+                - { value: charte, label: "Oui : bouton « Télécharger la charte » (page Le principe)" }
+                - { value: bulletin, label: "Oui : bouton « Bulletin d'adhésion » (page Rejoindre)" }
+
+  - name: equipe
+    label: Équipe (page L'association)
+    type: file
+    path: content/equipe.json
+    format: json
+    fields:
+      - name: membres
+        label: Membres affiché·es
+        type: object
+        list: true
+        fields:
+          - { name: nom, label: Nom, type: string }
+          - { name: role, label: "Fonction (ex. trésorière)", type: string }
+
+  - name: site
+    label: Réglages du site
+    type: file
+    path: content/site.json
+    format: json
+    fields:
+      - { name: email, label: "Adresse e-mail de contact", type: string }
+      - { name: facebook, label: "Lien de la page Facebook", type: string }
+      - { name: instagram, label: "Lien du compte Instagram", type: string }
+      - { name: cotisation, label: "Montant de la cotisation (ex. 1 €)", type: string }
+      - { name: responsable_publication, label: "Responsable de la publication (mentions légales)", type: string }
+      - { name: accueil_accroche, label: "Accueil : accroche en gras", type: string }
+      - { name: accueil_texte, label: "Accueil : phrase de présentation", type: text }
+      - { name: accueil_devise, label: "Accueil : devise", type: string }

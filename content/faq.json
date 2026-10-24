@@ -1,0 +1,9 @@
+{
+  "questions": [
+    {"question": "Faut-il s’inscrire ?", "reponse": "L’entrée est libre. Il suffit de venir."},
+    {"question": "Faut-il être adhérent·e ?", "reponse": "Non. Les cafés sont ouverts à toutes et tous. L’adhésion à l’association coûte {cotisation} par an et soutient l’organisation (voir [Rejoindre](rejoindre.html))."},
+    {"question": "Faut-il s’y connaître en politique ?", "reponse": "Pas du tout. On part d’une question simple et de ce que chacun·e vit. Vous pouvez parler, écouter ou passer votre tour."},
+    {"question": "Et si je ne suis pas d’accord avec les autres ?", "reponse": "C’est justement le but. La charte du débat garantit que l’on discute des idées, jamais des personnes. [Lire la charte](le-principe.html#charte)."},
+    {"question": "Comment venir ?", "reponse": "Le Génie est au 12 rue du Génie, à Montauban, à environ 200 mètres de la gare."}
+  ]
+}

@@ -1,57 +1,56 @@
 # La Turbine — site web
 
-Site de l'association **La Turbine** (cafés politiques & poétiques, Montauban).
-Adresse prévue : <https://turbine.genie-montauban.fr/>
+Site de l'association **La Turbine** (cafés politiques & poétiques, Montauban) : <https://turbine.genie-montauban.fr/>
 
-Site **statique** : de simples fichiers HTML/CSS, **aucun outil à installer, aucune compilation**.
-Tout changement poussé sur la branche `main` est publié automatiquement par GitHub Pages en 1 à 2 minutes.
+Le site est **généré automatiquement** : les bénévoles modifient les contenus dans une **interface d'administration** (Pages CMS) ; à chaque enregistrement, GitHub reconstruit et republie le site en 1 à 2 minutes. Aucun logiciel à installer.
 
-## Les fichiers
+## Pour les bénévoles : modifier le site
 
-| Fichier | Contenu |
+1. Aller sur **<https://app.pagescms.org>** et cliquer sur « Se connecter avec GitHub ».
+2. Choisir le dépôt **la-turbine** (si l'application demande des droits d'accès, accepter : ils servent uniquement à lire et modifier ce dépôt).
+3. Dans le menu de gauche, choisir ce que l'on veut modifier :
+
+| Menu | À quoi ça sert |
 |---|---|
-| `index.html` | Accueil (le prochain café y est présenté) |
-| `rendez-vous.html` | Prochain café, FAQ, cafés passés, pistes de thèmes |
-| `memoire.html` | La mémoire de La Turbine : un bloc par café passé, avec compte rendu (à ajouter à chaque café) |
-| `le-principe.html` | Déroulé d'une soirée, charte du débat, rôle de l'animation |
-| `association.html` | Objet, indépendance, fonctionnement, équipe |
-| `rejoindre.html` | Adhésion (1 €), bénévolat, partenariat, contact |
-| `presse.html` | Présentation courte, infos pratiques, visuels à télécharger |
-| `mentions-legales.html` | Mentions légales et données personnelles |
-| `turbine.css` | Tout le style (couleurs en haut du fichier, section `:root`) |
-| `img/` | Logo et affiches (format webp) |
-| `documents/` | PDF : charte du débat, bulletin d'adhésion |
-| `CNAME` | Nom de domaine du site (ne pas supprimer) |
+| **Prochain café** | Date, heures, question, invité·e, affiche du prochain rendez-vous (affiché sur l'accueil et la page Rendez-vous). Décocher « Afficher un prochain café » quand aucune date n'est fixée. |
+| **La mémoire (cafés passés)** | Un café = une fiche : question, date, invité·e, affiche, compte rendu. *Add an entry* pour en ajouter un après chaque café. |
+| **Questions fréquentes** | Les questions/réponses de la page Rendez-vous. |
+| **Pistes de thèmes** | Les thèmes évoqués pour la suite. |
+| **Documents à télécharger** | Ajouter un PDF (statuts, bulletin, dossier de presse…) : il apparaît sur la page « Documents ». |
+| **Équipe** | Les noms et fonctions affichés sur la page L'association. |
+| **Réglages du site** | E-mail, liens Facebook/Instagram, montant de la cotisation, texte d'accueil. |
+| **Images / Documents (Media)** | Bibliothèque des fichiers envoyés (affiches, PDF). |
 
-## Après chaque café : mettre à jour le site (sans rien installer)
+4. Cliquer sur **Save** : le site se met à jour tout seul. On peut suivre l'avancement dans l'onglet *Actions* du dépôt sur GitHub (une coche verte = publié).
 
-Tout se fait depuis le navigateur, sur github.com :
+### Après chaque café (marche à suivre)
+1. **La mémoire → Add an entry** : copier la question, la date, les heures, l'invité·e et l'affiche depuis « Prochain café » ; rédiger le compte rendu ; *Save*.
+2. **Prochain café** : changer la date, la question, l'affiche… du café suivant (ou décocher « Afficher » si pas de date).
 
-1. **Ajouter l'affiche** : dans le dossier `img/`, bouton *Add file → Upload files*. Format conseillé : `.webp`, 1000 px de large (convertissable sur squoosh.app).
-2. **Modifier le texte** : ouvrir le fichier, cliquer sur le crayon ✏️ (*Edit this file*), changer le texte, puis *Commit changes*.
-3. Les endroits à changer pour passer au café suivant :
-   - `index.html` et `rendez-vous.html` : bloc « Deuxième rendez-vous » (titre, date, heure, texte de la bulle, affiche) et la fiche `"@type":"Event"` en bas de l'en-tête (dates `startDate` / `endDate`) ;
-   - `memoire.html` : ajouter le café qui vient d'avoir lieu en haut de la liste (copier le bloc `<article class="rdv-ligne">` du café précédent) avec son compte rendu ;
-   - `presse.html` : la date et le titre dans « Informations pratiques ».
-4. Chercher « 19 novembre » dans chaque fichier (touche `t` sur GitHub, ou la loupe) pour ne rien oublier.
+## Donner l'accès à une personne
+- Sur github.com → dépôt **la-turbine** → *Settings → Collaborators → Add people* → son nom d'utilisateur GitHub. Il ou elle se connecte ensuite sur <https://app.pagescms.org> avec son compte GitHub.
+- Seules les personnes ajoutées comme collaborateur·rices peuvent modifier le site. Pour retirer l'accès : même écran, *Remove*.
+- Chaque modification est tracée (qui, quand, quoi) dans l'historique GitHub (*Commits*) et peut être annulée.
 
-## Donner l'accès à quelqu'un
+## Organisation du dépôt (pour une personne technique)
 
-- **Un·e bénévole** : sur github.com → ce dépôt → *Settings → Collaborators → Add people* → son nom d'utilisateur GitHub (ou son e-mail). Il ou elle pourra modifier le site, rien d'autre.
-- **Passer la main à l'association** : créer une organisation GitHub, puis *Settings → Danger zone → Transfer ownership*. Le site et son adresse continuent de fonctionner.
+| Chemin | Contenu |
+|---|---|
+| `content/` | Les contenus éditables (JSON + une fiche Markdown par café dans `content/cafes/`). |
+| `.pages.yml` | Configuration de l'interface d'administration (champs, libellés, dossiers de fichiers). |
+| `tools/build.js` | Générateur du site (Node.js, sans dépendance) : lit `content/` et écrit `_site/`. Contient aussi les textes des pages « fixes » (Le principe, L'association…). |
+| `.github/workflows/deploy.yml` | Lance le générateur puis publie `_site/` sur GitHub Pages à chaque push sur `main`. |
+| `turbine.css`, `turbine.js` | Style et menu mobile. |
+| `img/`, `documents/`, `assets/` | Images, PDF, polices (copiés tels quels dans le site). |
+| `CNAME` | Nom de domaine `turbine.genie-montauban.fr` (CNAME `turbine` → `samir-chikhi.github.io.` chez OVH ; à adapter si le dépôt change de propriétaire). |
 
-## Nom de domaine
+Tester en local : `node tools/build.js` puis ouvrir `_site/index.html` (ou `npx serve _site`).
+Modifier un texte « fixe » (page Le principe, charte, mentions légales…) : éditer `tools/build.js`, enregistrer sur `main` ; le site se republie.
 
-`turbine.genie-montauban.fr` est un sous-domaine du Génie, géré chez OVH :
-enregistrement **CNAME** `turbine` → `samir-chikhi.github.io.` (à mettre à jour si le dépôt change de propriétaire :
-la cible devient `<nouveau-compte>.github.io.`). Dans GitHub : *Settings → Pages → Custom domain*, avec **Enforce HTTPS** coché.
+## Règles à respecter
+- Aucun cookie, aucun outil de mesure, aucun formulaire, aucun widget de réseau social : seulement des liens. Si l'un d'eux est ajouté, mettre à jour les mentions légales.
+- Aucun secret ni pièce d'identité dans ce dépôt (il est public).
+- Photos de participant·es : uniquement avec leur accord (droit à l'image).
+- Écriture inclusive : utiliser le point médian (« adhérent·e », « invité·e »).
 
-## Ce qui est volontairement absent
-
-- Aucun cookie, aucun outil de mesure, aucun formulaire, aucun widget Facebook/Instagram : seulement des liens. Si vous en ajoutez un, mettez à jour `mentions-legales.html` et la politique de confidentialité.
-- Aucun secret, mot de passe ou pièce d'identité dans ce dépôt (il est public). Ne jamais y déposer les documents administratifs de l'association.
-- Photos de participants : à ne publier qu'avec leur accord (droit à l'image).
-
-## Tester sur son ordinateur (facultatif)
-
-Double-cliquer sur `index.html` suffit pour un aperçu. Pour un rendu identique à la production : `npx serve .` puis ouvrir http://localhost:3000.
+Conception et maintenance : MUSIVA.

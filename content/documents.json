@@ -1,0 +1,6 @@
+{
+  "documents": [
+    {"titre": "Charte du débat", "description": "Les huit engagements de La Turbine et la formule d’ouverture.", "categorie": "Charte du débat", "fichier": "/documents/charte-du-debat-la-turbine.pdf", "emplacement": "charte"},
+    {"titre": "Bulletin d’adhésion", "description": "À remplir et à remettre lors d’un café (cotisation de 1 € par an).", "categorie": "Association", "fichier": "/documents/bulletin-adhesion-la-turbine.pdf", "emplacement": "bulletin"}
+  ]
+}
